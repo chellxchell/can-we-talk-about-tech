@@ -77,7 +77,7 @@ class App extends React.Component {
   }
 
   return (
-    <div className="App">
+    <div className="root">
       <section id="section1">
         <div className="question">How would you like to save your responses?</div>
         <div>
