@@ -28,11 +28,12 @@ form{
 }
 
 textarea{
-  height: 150px;
-  width: 500px;
+  height: 200px;
+  width: 80%;
   border: none;
   outline: none;
   resize: none;
+  margin: 25px 0;
 }
 
 button{
@@ -51,6 +52,7 @@ button{
 }
 
 input[type=submit]{
+  @extend button;
   font-size: 25px;
   font-weight: bold;
   color: white;

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.scss';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 class Form extends React.Component {
     constructor(props) {
@@ -18,8 +19,9 @@ class Form extends React.Component {
     }
   
     handleSubmit(event) {
-        this.props.handler(this.props.question,this.state.value)
+        this.props.handler(this.props.question,this.state.value);
         event.preventDefault();
+        window.location.href = `#section${this.props.sectionNum+1}`;
     }
   
     render() {
@@ -29,7 +31,8 @@ class Form extends React.Component {
           <div className="question">{this.props.question}</div>
           <textarea type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save"/>
+        {/* <AnchorLink href={`#section${this.props.sectionNum+1}`}><input type="submit" value="Save"/></AnchorLink> */}
       </form>
       );
     }

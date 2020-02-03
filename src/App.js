@@ -2,19 +2,21 @@ import React from 'react';
 import './App.scss';
 import Form from './components/Form';
 import Answers from './components/Answers';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       map: new Map(),
-      viewAnswers: false,
+      viewAnswers: false
     };
     this.handler = this.handler.bind(this)
     this.formatMap = this.formatMap.bind(this)
   }
 
   handler(key,value) {
+    console.log("yes");
     this.state.map.set(key,value);
     console.log(this.state.map)
   }
@@ -41,26 +43,32 @@ class App extends React.Component {
     "Do you think that you are being safe and careful on social media?"
   ];
   
+  let sectionNum = 2;
   for (let i in questions){
     if (i==0){
       allSections.push(
-        <section>
+        <section id={`section${sectionNum}`}>
           <div className="question">Questions for Children to Ask</div>
+          <AnchorLink href={`#section${sectionNum+1}`}><button>Go</button></AnchorLink>
         </section>
       )
+      ++sectionNum;
     }
     if (i==7){
       allSections.push(
-        <section>
+        <section id={`section${sectionNum}`}>
           <div className="question">Questions for Parents to Ask</div>
+          <AnchorLink href={`#section${sectionNum+1}`}><button>Go</button></AnchorLink>
         </section>
       )
+      ++sectionNum;
     }
     allSections.push(
-      <section>
-        <Form question={questions[i]} handler={this.handler}/>
+      <section id={`section${sectionNum}`}>
+        <Form question={questions[i]} handler={this.handler} sectionNum={sectionNum} />
        </section>
     )
+    ++sectionNum;
   }
 
   let answers;
@@ -70,20 +78,20 @@ class App extends React.Component {
 
   return (
     <div className="App">
-      <section>
+      <section id="section1">
         <div className="question">How would you like to save your responses?</div>
         <div>
-          <button>Type</button>
+          <AnchorLink href='#section2'><button>Type</button></AnchorLink>
           <button>Record</button>
           <button>None</button>
         </div>
       </section>
       {allSections}
-      <section>
+      <section id={`section${sectionNum}`}>
         <button onClick={this.formatMap}>{this.state.viewAnswers? "Hide Answers" : "View Answers"}</button>
         {answers}
       </section>
-      <section>
+      <section id={`section${sectionNum+1}`}>
         <form onSubmit={this.handleSubmit}>
         <label>
           <div className="question">Thank you for having this dialogue! Enter your emails to save your responses.</div>
